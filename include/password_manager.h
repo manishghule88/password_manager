@@ -8,12 +8,13 @@ public:
 
 private:
     std::string masterFileName = "master.dat";
+    std::string storePassword = {};
     
     void initialize();
     bool masterFileExists();
     void createMasterFile();
     bool verifyMasterPassword();
-
+    bool createMasterPassword();
 };
 
 #endif
