@@ -12,12 +12,14 @@ void PasswordManager::
 initialize() {
     if ( !masterFileExists()) {
         createMasterFile();
-    } else {
-        if ( !verifyMasterPassword()) {
-            std::cout << "Wrong Password\n";
-            return;
-        }
-    }
+    } 
+    createMasterPassword();
+    // else {
+    //     if ( !verifyMasterPassword()) {
+    //         std::cout << "Wrong Password\n";
+    //         return;
+    //     }
+    // }
     
     std::cout << "Access Granted\n";
 }
@@ -25,6 +27,7 @@ initialize() {
 void PasswordManager::
 createMasterFile() {
     
+    // Create file
     std::ofstream mFile;
 
     mFile.open( masterFileName );
@@ -52,12 +55,27 @@ masterFileExists() {
 }
 
 bool PasswordManager::
-verifyMasterPassword() {
-    std::ifstream file( masterFileName );
+createMasterPassword() {
 
-    if ( masterFileName.is_open()) {
-        std::cout << "File is empty\n";
-    } else {
-        std::cout << "File is not empty\n";
-    }
+    std::ofstream file( masterFileName );
+
+    if ( file.is_open()) {
+        std::cout << "CREATE AND ENTER MASTER PASSWORD :" << std::endl;
+        std::cin >> storePassword;
+
+        file << storePassword;
+        return true;
+        
+    } 
 }
+
+// bool PasswordManager::
+// verifyMasterPassword() {
+//     std::ifstream file( masterFileName );
+
+//     if ( file.is_open()) {
+//         std::cout << "File is empty\n";
+//     } else {
+//         std::cout << "File is not empty\n";
+//     }
+// }
