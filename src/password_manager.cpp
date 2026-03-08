@@ -3,6 +3,11 @@
 
 #include "password_manager.h"
 
+PasswordManager::
+PasswordManager() {
+    // Nothing to do yet
+}
+
 void PasswordManager::
 start() {
     initialize();
@@ -10,13 +15,20 @@ start() {
 
 void PasswordManager::
 initialize() {
+    bool verifyPassword = false;
+
     if ( !masterFileExists()) {
         createMasterFile();
     } else {
-        verifyMasterPassword();
+        verifyPassword = verifyMasterPassword();
+        
+        if ( verifyPassword ) {
+            createMenu();
+        } else {
+            std::cout << "USER PASSWORD NOT MATCHED WITH MASTER PASSWORD" << std::endl;
+        }
     }
     
-    std::cout << "Access Granted\n";
 }
 
 void PasswordManager::
@@ -76,3 +88,43 @@ verifyMasterPassword() {
         return false;
     }
 }
+
+void PasswordManager::
+createMenu() {
+    int selectMenu = 0;
+
+    std::cout << "Add Password\n";
+    std::cout << "View all Password\n";
+    std::cout << "Search Password\n";
+    std::cout << "Delete Password\n";
+    std::cout << "Exit\n";
+
+    std::cin >> selectMenu;
+    
+    if ( selectMenu == 1 ) {
+        addPassword();
+    } else if ( selectMenu == 2 ) {
+        viewAllPassword();
+    } else if ( selectMenu == 3 ) {
+        searchPassword();
+    } else if ( selectMenu == 4 ) {
+        deletePassword();
+    } else {
+        exitRun();
+    }
+}
+
+void PasswordManager::
+addPassword() {}
+
+void PasswordManager::
+viewAllPassword() {}
+
+void PasswordManager::
+searchPassword() {}
+
+void PasswordManager::
+deletePassword() {}
+
+void PasswordManager::
+exitRun() {}
