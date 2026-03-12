@@ -115,7 +115,36 @@ createMenu() {
 }
 
 void PasswordManager::
-addPassword() {}
+addPassword() {
+    std::ofstream vFile;
+
+    std::string website;
+    std::string userName;
+    std::string password;
+
+    vFile.open( vaultFileName, std::ios::app );
+
+    if ( !vFile.is_open()) {
+        std::cout << "Error: in creating vault\n";
+        return;
+    }
+
+    std::cout << "Please...Enter your Website\n";
+    std::cin >> website;
+
+    std::cout << "Please...Enter your Username\n";
+    std::cin >> userName;
+
+    std::cout << "Please...Enter your Password\n";
+    std::cin >> password;
+
+    vFile << website << "|" << userName << "|" << password << std::endl;
+
+    std::cout << "Password added successfully!\n";
+    vFile.close();
+    
+    createMenu();
+}
 
 void PasswordManager::
 viewAllPassword() {}
