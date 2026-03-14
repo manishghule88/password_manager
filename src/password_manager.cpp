@@ -161,5 +161,6 @@ deletePassword() {}
 
 void PasswordManager::
 exitRun() {
+    /// exit
     exit( 0 );
 }
