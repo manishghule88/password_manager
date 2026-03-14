@@ -128,7 +128,8 @@ addPassword() {
     std::string userName;
     std::string password;
 
-    vFile.open( vaultFileName );
+    // append mode ios::app
+    vFile.open( vaultFileName, std::ios::app );
 
     if ( !vFile.is_open()) {
         std::cout << "Error: in creating vault file\n";
