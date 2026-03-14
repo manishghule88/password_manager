@@ -93,29 +93,61 @@ void PasswordManager::
 createMenu() {
     int selectMenu = 0;
 
-    std::cout << "Add Password\n";
-    std::cout << "View all Password\n";
-    std::cout << "Search Password\n";
-    std::cout << "Delete Password\n";
-    std::cout << "Exit\n";
-
-    std::cin >> selectMenu;
+    while ( true ) {
+        std::cout << "1. Add Password\n";
+        std::cout << "2. View all Password\n";
+        std::cout << "3. Search Password\n";
+        std::cout << "4. Delete Password\n";
+        std::cout << "5. Exit\n";
     
-    if ( selectMenu == 1 ) {
-        addPassword();
-    } else if ( selectMenu == 2 ) {
-        viewAllPassword();
-    } else if ( selectMenu == 3 ) {
-        searchPassword();
-    } else if ( selectMenu == 4 ) {
-        deletePassword();
-    } else {
-        exitRun();
+        std::cin >> selectMenu;
+        
+        if ( selectMenu == 1 ) {
+            addPassword();
+        } else if ( selectMenu == 2 ) {
+            viewAllPassword();
+        } else if ( selectMenu == 3 ) {
+            searchPassword();
+        } else if ( selectMenu == 4 ) {
+            deletePassword();
+        } else if ( selectMenu == 5 ) {
+            std::cout << "Exiting Password Manager...\n";
+            break;
+        } else {
+            std::cout << "Invalid Option\n";
+        }
     }
 }
 
 void PasswordManager::
-addPassword() {}
+addPassword() {
+
+    std::ofstream vFile;
+
+    std::string website;
+    std::string userName;
+    std::string password;
+
+    vFile.open( vaultFileName );
+
+    if ( !vFile.is_open()) {
+        std::cout << "Error: in creating vault file\n";
+        return;
+    }    
+
+    std::cout << "Please...Enter your Website" << std::endl;
+    std::cin >> website;
+
+    std::cout << "Please...Enter your Username" << std::endl;
+    std::cin >> userName;
+
+    std::cout << "Please...Enter your Password" << std::endl;
+    std::cin >> password;
+
+    vFile << "|" << website << "|" << userName << "|" << password << std::endl;
+    
+    vFile.close();
+}
 
 void PasswordManager::
 viewAllPassword() {}
@@ -127,4 +159,6 @@ void PasswordManager::
 deletePassword() {}
 
 void PasswordManager::
-exitRun() {}
+exitRun() {
+    exit( 0 );
+}
